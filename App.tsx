@@ -11,9 +11,7 @@ import {
   Dimensions,
 } from 'react-native';
 
-// ====================
-// Models & Constants
-// ====================
+
 const EVENT_POOL = [
   { type: 'BALL', payload: { runs: 1, commentary: 'Pushed to mid-on for a quick single.' } },
   { type: 'BOUNDARY', payload: { runs: 4, commentary: 'Classic cover drive, races to the boundary!' } },
@@ -23,9 +21,7 @@ const EVENT_POOL = [
   { type: 'BOUNDARY', payload: { runs: 6, commentary: 'Smashes it for six straight down the ground!' } },
 ];
 
-// ====================
-// Ring Buffer Utility
-// ====================
+
 class RingBuffer {
   constructor(limit) {
     this.limit = limit;
@@ -48,9 +44,7 @@ class RingBuffer {
   }
 }
 
-// ====================
-// Accumulator Utility
-// ====================
+
 function applyEvent(summary, evt) {
   let { runs, wickets, overs, balls } = summary;
   switch (evt.type) {
@@ -78,9 +72,7 @@ function applyEvent(summary, evt) {
   return { runs, wickets, overs, balls };
 }
 
-// ====================
-// Main App Component
-// ====================
+
 export default function App() {
   // Feed & Summary State
   const [feed, setFeed] = useState([]);
@@ -118,9 +110,7 @@ export default function App() {
     return () => clearInterval(t);
   }, []);
 
-  // ====================
-  // Animated Header Setup
-  // ====================
+
   const liveAnim = useRef(new Animated.Value(1)).current;
   const headerAnim = useRef(new Animated.Value(0)).current;
   useEffect(() => {
@@ -137,9 +127,7 @@ export default function App() {
     }).start();
   }, []);
 
-  // ====================
-  // Event Card Renderers
-  // ====================
+
   const BallCard = React.memo(({ event }) => (
     <View style={styles.ballCard}>
       <View style={styles.ballIndicator} />
@@ -196,9 +184,7 @@ export default function App() {
     }
   }, []);
 
-  // ====================
-  // App Render
-  // ====================
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#1B5E20" barStyle="light-content" />
@@ -238,10 +224,10 @@ export default function App() {
   );
 }
 
-// ====================
-// Styles
-// ====================
+
 const { width } = Dimensions.get('window');
+
+
 const styles = StyleSheet.create({
   container: { flex:1, backgroundColor:'#F5F5F5' },
 
